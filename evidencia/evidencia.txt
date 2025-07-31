@@ -1,0 +1,42 @@
+# Evidencia de ejecución del proyecto
+
+## 1. Inicialización del microservicio
+
+Comando:
+python3 main.py
+
+Resultado:
+Application 'default' is ready at http://127.0.0.1:8000/
+
+## 2. Prueba con cURL
+
+Comando:
+curl -X POST http://127.0.0.1:8000/predict -H "Content-Type: application/json" -d '{"number": 3}'
+
+Resultado:
+{"numero":3,"clasificacion":"impar"}
+
+## 3. Contenerización con Docker
+
+Comando:
+sudo docker build -t ray-fastapi-app .
+
+Resultado:
+Imagen Docker construida exitosamente.
+
+Comando:
+sudo docker run -p 8000:8000 ray-fastapi-app
+
+Resultado:
+Microservicio funcionando en contenedor Docker.
+
+## 4. Prueba desde cliente Python
+
+Comando:
+python3 cliente.py
+
+Input:
+9
+
+Resultado:
+Resultado: 9 es impar

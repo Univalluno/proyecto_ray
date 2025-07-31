@@ -1,0 +1,23 @@
+import ray
+from ray import serve
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+ray.init()
+serve.start(detached=True)
+
+app = FastAPI()
+
+class InputData(BaseModel):
+    number: int
+
+@serve.deployment
+@serve.ingress(app)
+class MLModelService:
+    @app.post("/predict")
+    async def predict(self, data: InputData):
+        number = data.number
+        result = "par" if number % 2 == 0 else "impar"
+        return {"numero": number, "clasificacion": result}
+
+MLModelService.deploy()

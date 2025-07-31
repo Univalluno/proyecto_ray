@@ -1,0 +1,23 @@
+import ray
+from ray import serve
+from fastapi import FastAPI, Request
+from pydantic import BaseModel
+from core.tasks import es_par
+
+app = FastAPI()
+
+@serve.deployment
+@serve.ingress(app)
+class MLModelService:
+    @app.post("/predict")
+    async def predict(self, request: Request):
+        data = await request.json()
+        number = data.get("number")
+        result_ref = es_par.remote(number)
+        result = await result_ref
+        return {"resultado": result}
+
+if __name__ == "__main__":
+    ray.init()
+    serve.run(MLModelService.bind(), route_prefix="/")
+
