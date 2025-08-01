@@ -63,7 +63,7 @@ Output:
 
 ## 👤 Autor
 
-Estudiante: [Tu Nombre]  
+Estudiante: [Jerson David Otero Cruz]  
 Curso: Infraestructuras Paralelas y Distribuidas  
 Universidad del Valle  
 Julio 2025

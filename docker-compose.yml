@@ -1,0 +1,9 @@
+version: '3.9'
+
+services:
+  ray_app:
+    build: ./api
+    ports:
+      - "8000:8000"
+    shm_size: '1gb'
+    container_name: ray_app

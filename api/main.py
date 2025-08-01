@@ -4,8 +4,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from core.tasks import es_par
 
-ray.init()
-serve.start(detached=True)
+Serve.start(detached=True)
 
 app = FastAPI()
 
@@ -20,6 +19,5 @@ class MLModelService:
         result = await es_par.remote(item.number)
         return {"resultado": result}
 
-# Lanza el servicio (sin host ni port)
 serve.run(MLModelService.bind())
 

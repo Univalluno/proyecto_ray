@@ -21,5 +21,4 @@ RUN pip install --upgrade pip && pip install "ray[serve]" fastapi uvicorn
 EXPOSE 8000
 
 # Comando para iniciar el servicio
-CMD ["python3", "main.py"]
-
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
